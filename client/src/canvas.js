@@ -1,77 +1,104 @@
-import { computePointInCanvas, drawLine } from "./utils.js";
-const canvas = document.querySelector("canvas");
-const ctx = canvas.getContext("2d");
+import { onClearCanvasSignal, onDrawLineSignal } from "./index.js";
+import { computePointInCanvas } from "./utils.js";
 const clearBtn = document.querySelector("#clear");
 const button = document.querySelector("#draw");
-let prevPoint = null;
-let isMouseDown = false;
 
 export class Canvas {
-  constructor() {
-    this.canvas = 
+  constructor(socket) {
+    this.socket = socket;
+    this.canvas = document.querySelector("canvas");
+    this.ctx = this.canvas.getContext("2d");
+    this.prevPoint = null;
+    this.isMouseDown = false;
+    this.color = "";
+    this.canDraw = true;
+    this.#initialize();
+
+    onDrawLineSignal.connect(this.drawLine);
+    onClearCanvasSignal.connect(this.clearCanvas);
   }
-}
 
-canvas.addEventListener("mousedown", (e) => {
-  console.log("Mouse down");
-  isMouseDown = true;
-});
+  #initialize() {
+    this.canvas.addEventListener("mousedown", (e) => {
+      console.log("Mouse down");
+      this.isMouseDown = true;
+    });
 
-const socket = io("http://localhost:5000");
+    this.canvas.addEventListener("mousemove", (e) => {
+      if (!this.isMouseDown) return;
+      this.currentPoint = computePointInCanvas(e, this.canvas);
+      if (!this.currentPoint) return;
 
-socket.on("connect", () => {
-  console.log("connected", socket.id);
-});
+      const drawLineProps = {
+        prevPoint: this.prevPoint,
+        currentPoint: this.currentPoint,
+        color: this.color,
+      };
 
-socket.on("draw-line", (data) => {
-  drawLine({ ...data, ctx, color: "" });
-});
+      this.drawLine(drawLineProps);
 
-const submit = document.querySelector("#submit");
-submit.addEventListener("click", () => {
-  console.log("emmited data");
-  socket.emit("canvas", getCanvasData());
-});
+      this.socket.emit("draw-line", drawLineProps);
 
-console.log(socket);
+      this.prevPoint = this.currentPoint;
+    });
 
-canvas.addEventListener("mousemove", (e) => {
-  if (!isMouseDown) return;
-  const currentPoint = computePointInCanvas(e, canvas);
-  if (!currentPoint) return;
+    this.canvas.addEventListener("mouseup", (e) => {
+      this.prevPoint = null;
+      this.isMouseDown = false;
+      this.ctx.closePath();
+    });
+  }
 
-  drawLine({ prevPoint, currentPoint, ctx, color: "da" });
-  socket.emit("draw-line", { prevPoint, currentPoint });
-  prevPoint = currentPoint;
-
-  // data = canvas.toDataURL();
-});
-
-canvas.addEventListener("mouseup", (e) => {
-  prevPoint = null;
-  isMouseDown = false;
-  ctx.closePath();
-});
-
-clearBtn.addEventListener("click", (e) => {
-  console.log(canvas.toDataURL());
-  data = canvas.toDataURL();
-  ctx.clearRect(0, 0, 10000, 10000);
-});
-
-let data = "";
-button.addEventListener("click", (e) => {
-  setCanvasData(data);
-});
-
-export const getCanvasData = () => data;
-export const setCanvasData = (data) => {
-  var img = new Image();
-  img.onload = function () {
-    canvas.width = img.width;
-    canvas.height = img.height;
-    canvas.getContext("2d").drawImage(img, 0, 0);
+  setColor = (color) => {
+    this.color = color;
   };
 
-  img.src = data;
-};
+  setCanDraw = (canDraw) => {
+    this.canDraw = canDraw;
+  };
+
+  clearCanvas = () => {
+    // console.log(this.canvas.toDataURL());
+    this.ctx.clearRect(0, 0, 10000, 10000);
+  };
+
+  drawLine = ({ prevPoint, currentPoint, color }) => {
+    const { x: currX, y: currY } = currentPoint;
+    const lineColor = color;
+    const lineWidth = 5;
+
+    // if (color == "#ffffff") {
+    //   this.ctx.clearRect(currX - 10, currY - 10, 20, 20);
+    //   return;
+    // }
+
+    let startPoint = prevPoint ?? currentPoint;
+    this.ctx.beginPath();
+    this.ctx.lineWidth = lineWidth;
+    this.ctx.strokeStyle = lineColor;
+    this.ctx.moveTo(startPoint.x, startPoint.y);
+    this.ctx.lineTo(currX, currY);
+    this.ctx.stroke();
+
+    this.ctx.fillStyle = lineColor;
+    this.ctx.beginPath();
+    this.ctx.arc(startPoint.x, startPoint.y, 2, 0, 2 * Math.PI);
+    this.ctx.fill();
+  };
+}
+
+// const submit = document.querySelector("#submit");
+// submit.addEventListener("click", () => {
+//   console.log("emmited data");
+//   socket.emit("canvas", getCanvasData());
+// });
+
+// console.log(socket);
+
+// clearBtn.addEventListener("click", (e) => {
+// });
+
+// let data = "";
+// button.addEventListener("click", (e) => {
+//   setCanvasData(data);
+// });

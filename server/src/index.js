@@ -15,9 +15,20 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
   console.log("a user connected", socket.id);
+
   socket.on("draw-line", ({ prevPoint, currentPoint, color }) => {
     console.log({ prevPoint, currentPoint, color });
     socket.broadcast.emit("draw-line", { prevPoint, currentPoint, color });
+  });
+
+  socket.on("clear-canvas", () => {
+    socket.broadcast.emit("clear-canvas");
+  });
+
+  socket.on("guess", (data) => {
+    // socket.broadcast.emit("message", data);
+    io.emit("message", data);
+    console.log(data);
   });
 });
 
