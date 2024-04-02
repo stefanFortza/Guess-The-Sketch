@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Draw App</title>
+
+    <link href="/css/game.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- <%- include('partials/navbar') %> -->
+
+    <main>
+      <section id="round-data" class="shadow round-edges">
+        <div id="timer" class="shadow round-edges">Data</div>
+        <div id="user" class="shadow round-edges">Data</div>
+        <div id="word" class="shadow round-edges">Data</div>
+      </section>
+
+      <section id="players" class="shadow round-edges">
+        <h3>Players</h3>
+        <div id="players-container">
+          <div>Player Name</div>
+          <div>Player Name</div>
+        </div>
+      </section>
+
+      <section id="canvas-container" class="shadow round-edges">
+        <div id="button-container">
+          <button id="clear">Clear</button>
+          <input type="color" name="" id="color-picker" />
+        </div>
+
+        <canvas height="600" width="600"></canvas>
+      </section>
+
+      <section id="chat" class="shadow round-edges">
+        <div id="message-container">
+          <div>message</div>
+          <div>message</div>
+          <div>message</div>
+          <div>message</div>
+        </div>
+        <form action="" id="message-input">
+          <input type="text" name="message" id="" />
+        </form>
+      </section>
+
+      <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+      <script src="js/index.js" type="module"></script>
+    </main>
+  </body>
+</html>
