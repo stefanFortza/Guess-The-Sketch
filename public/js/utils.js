@@ -6,34 +6,36 @@
  */
 export function computePointInCanvas(event, canvas) {
   const rect = canvas.getBoundingClientRect();
-  const x = event.x - rect.x;
-  const y = event.y - rect.y;
+  const x = event.clientX - rect.x;
+  const y = event.clientY - rect.y;
   return { x, y };
 }
-
-/**
- *
- * @param {DrawLineProps} param
- */
-// export const drawLine = ({ prevPoint, currentPoint, ctx, color }) => {
-//   const { x: currX, y: currY } = currentPoint;
-//   const lineColor = color;
-//   const lineWidth = 5;
-
-//   let startPoint = prevPoint ?? currentPoint;
-//   ctx.beginPath();
-//   ctx.lineWidth = lineWidth;
-//   ctx.strokeStyle = lineColor;
-//   ctx.moveTo(startPoint.x, startPoint.y);
-//   ctx.lineTo(currX, currY);
-//   ctx.stroke();
-
-//   // ctx.fillStyle = lineColor;
-//   ctx.beginPath();
-//   ctx.arc(startPoint.x, startPoint.y, 2, 0, 2 * Math.PI);
-//   ctx.fill();
-// };
 
 export function getUser() {
   return JSON.parse(sessionStorage.getItem("player"));
 }
+
+const players = document.querySelector("#players");
+let arePlayersHidden = true;
+document.querySelector("#drawer").addEventListener("click", (e) => {
+  // players.style.display = "block";
+  if (arePlayersHidden) {
+    players.style.display = "block";
+    console.log("da");
+    arePlayersHidden = false;
+  } else {
+    players.style.display = "none";
+    arePlayersHidden = true;
+  }
+});
+
+window.addEventListener("resize", (e) => {
+  if (window.innerWidth > 700) {
+    players.style.display = "block";
+    arePlayersHidden = false;
+  } else {
+    players.style.display = "none";
+    arePlayersHidden = true;
+  }
+  console.log(e);
+});

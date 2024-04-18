@@ -5,42 +5,53 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Draw App</title>
 
-    <link href="/css/game.css" rel="stylesheet" />
+    <%- include('partials/css-head') %>
+
+    <link href="/css/game/game.css" rel="stylesheet" />
+    <link href="/css/game/chat.css" rel="stylesheet" />
+    <link href="/css/game/players.css" rel="stylesheet" />
+    <link href="/css/game/round-data.css" rel="stylesheet" />
+
+    <link href="/css/game/phone/game.css" rel="stylesheet" />
+    <link href="/css/game/phone/chat.css" rel="stylesheet" />
+    <link href="/css/game/phone/players.css" rel="stylesheet" />
+    <link href="/css/game/phone/round-data.css" rel="stylesheet" />
   </head>
   <body>
     <!-- <%- include('partials/navbar') %> -->
 
     <main>
       <section id="round-data" class="shadow round-edges">
-        <div id="timer" class="shadow round-edges">Data</div>
-        <div id="user" class="shadow round-edges">Data</div>
-        <div id="word" class="shadow round-edges">Data</div>
+        <div id="round-index" class="shadow round-edges"></div>
+        <div id="timer" class="shadow round-edges"></div>
+        <!-- <div id="word" class="shadow round-edges">Data</div> -->
+        <div id="user" class="shadow round-edges"></div>
       </section>
 
       <section id="players" class="shadow round-edges">
         <h3>Players</h3>
-        <div id="players-container">
-          <div>Player Name</div>
-          <div>Player Name</div>
-        </div>
+        <div id="players-container"></div>
       </section>
 
-      <section id="canvas-container" class="shadow round-edges">
-        <div id="button-container">
-          <button id="clear">Clear</button>
-          <input type="color" name="" id="color-picker" />
-        </div>
+      <section>
+        <div id="word" class="shadow round-edges">___</div>
+        <section id="canvas-container" class="shadow round-edges">
+          <div id="button-container">
+            <button id="clear" class="shadow">Clear</button>
+            <input type="color" name="" id="color-picker" class="shadow" />
+            <button id="eraser" class="shadow">
+              <i class="fa-solid fa-eraser"></i>
+            </button>
+          </div>
 
-        <canvas height="600" width="600"></canvas>
+          <canvas height="300" width="300"></canvas>
+        </section>
       </section>
 
       <section id="chat" class="shadow round-edges">
-        <div id="message-container">
-          <div>message</div>
-          <div>message</div>
-          <div>message</div>
-          <div>message</div>
-        </div>
+        <button id="drawer">show players</button>
+        <h3>Chat</h3>
+        <div id="message-container"></div>
         <form action="" id="message-input">
           <input type="text" name="message" id="" />
         </form>

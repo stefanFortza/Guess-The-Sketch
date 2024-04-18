@@ -1,4 +1,9 @@
-import { onPlayerJoined, onPlayerLeft, onRoundDataReceived } from "./index.js";
+import {
+  onCorrectGuess,
+  onPlayerJoined,
+  onPlayerLeft,
+  onRoundDataReceived,
+} from "./index.js";
 
 export class PlayersManager {
   constructor(socket) {
@@ -9,12 +14,13 @@ export class PlayersManager {
     onPlayerJoined.connect(this.addPlayer);
     onRoundDataReceived.connect(this.onRoundReceived);
     onPlayerLeft.connect(this.removePlayer);
+    onCorrectGuess.connect(this.onPlayerGuessed);
   }
 
   addPlayer = (player) => {
-    const playerNode = document.createElement("div");
-    playerNode.innerText = `${player.username}`;
-    playerNode.id = player.id;
+    const aud = new Audio("/assets/sound/player-joined.mp3");
+    aud.play();
+    const playerNode = this.#getPlayerEl(player);
     // this.playersContainer.innerHTML += `<div>${message.username}</div>`;
     this.playersContainer.appendChild(playerNode);
 
@@ -38,6 +44,33 @@ export class PlayersManager {
     }
     // console.log(roundData);
   };
+
+  onPlayerGuessed = (player) => {
+    this.playersContainer.childNodes.forEach((node) => {
+      if (node.id == player.id) {
+        const pl = this.#getPlayerEl(player);
+        node.innerHTML = pl.innerHTML;
+        node
+          .querySelector("img")
+          .classList.add("correct-guess-player-animation-class");
+
+        const aud = new Audio("/assets/sound/player-guessed.mp3");
+        aud.play();
+      }
+    });
+  };
+
+  #getPlayerEl(player) {
+    const playerNode = document.createElement("div");
+    const image = document.createElement("img");
+    image.src = player.imageSrc;
+
+    playerNode.innerHTML = `<div><b>${player.username}</b> ${player.score}</div>`;
+    playerNode.id = player.id;
+    playerNode.appendChild(image);
+    playerNode.classList.add("shadow");
+    return playerNode;
+  }
 }
 
 class Player {

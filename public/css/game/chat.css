@@ -1,0 +1,76 @@
+#chat {
+  border: 2px solid black;
+  padding: 10px;
+  width: 90%;
+  max-height: 100%;
+  height: 70vh;
+  background-color: #2a9d8f;
+  /* margin-top: 50px; */
+  /* align-self: center;
+  justify-self: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#chat > h3 {
+  font-size: 30px;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+#chat > #message-container * {
+  /* font-family: "Roboto" !important; */
+}
+
+#chat > #message-container {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: auto;
+  align-self: flex-start;
+  /* border: 2px solid red; */
+  overflow: scroll;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+#chat > #message-container > div {
+  font-size: 1.5rem;
+  /* background-color: #eeeeee; */
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+#chat > form {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#chat > form > input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5px;
+  border-radius: 0.5em;
+  font-size: 20px;
+}
+
+.player-drawing-message {
+  background-color: cadetblue;
+}
+
+.player-joined-message {
+  background-color: lightblue;
+}
+.player-left-message {
+  background-color: "#f70d1a";
+}
+
+.correct-guessed-message {
+  background-color: green;
+}

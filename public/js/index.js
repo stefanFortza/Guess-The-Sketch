@@ -13,6 +13,8 @@ export const onCanvasStateFromServer = new Signal();
 export const onPlayerJoined = new Signal();
 export const onRoundDataReceived = new Signal();
 export const onPlayerLeft = new Signal();
+export const onCorrectGuess = new Signal();
+export const onClientReady = new Signal();
 
 const canvas = new Canvas(socket);
 const chatManager = new ChatManager(socket);
@@ -25,10 +27,12 @@ socket.on("connect", () => {
   console.log(location);
   const a = new URLSearchParams(location.search);
   const name = a.get("username");
+  const imageSrc = a.get("avatar");
   console.log(name);
 
-  socket.emit("client-ready", name, (player) => {
+  socket.emit("client-ready", { name, imageSrc }, (player) => {
     sessionStorage.setItem("player", JSON.stringify(player));
+    onClientReady.emit(player);
   });
 });
 
@@ -63,6 +67,10 @@ socket.on("message", (data) => {
   onMessageReceived.emit(data);
 });
 
+socket.on("correct-guess", (player) => {
+  onCorrectGuess.emit(player);
+});
+
 socket.on("player-joined", (player) => {
   onPlayerJoined.emit(player);
 });
@@ -75,3 +83,5 @@ socket.on("round-data", (roundData) => {
   onRoundDataReceived.emit(roundData);
   console.log(roundData);
 });
+
+screen.orientation.lock("landscape");

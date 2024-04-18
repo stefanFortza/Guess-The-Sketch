@@ -1,0 +1,25 @@
+#round-data {
+  grid-column: 1/4;
+  /* padding: 20px; */
+  padding: 10px;
+  background-color: #2a9d8f;
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  min-width: 60%;
+}
+
+#round-data > div {
+  text-align: center;
+  background-color: #f4a261;
+  padding: 10px;
+  min-width: 30px;
+}
+
+#word {
+  padding: 10px;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 10px;
+  box-shadow: none;
+}

@@ -19,6 +19,10 @@ function init() {
   app.get("/game", (req, res) => {
     res.render("game");
   });
+
+  app.get("/how-to-play", (req, res) => {
+    res.render("how-to-play");
+  });
 }
 
 export default { init };

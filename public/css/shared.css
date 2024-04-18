@@ -1,0 +1,20 @@
+@font-face {
+  font-family: MightySouly;
+  src: url("/assets/fonts/MightySouly-lxggD.ttf");
+}
+
+* {
+  font-family: MightySouly;
+}
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.round-edges {
+  border-radius: 0.7em;
+}
+
+.hide {
+  /* visibility: hidden; */
+  display: none;
+}

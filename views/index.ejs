@@ -3,13 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <%- include('partials/css-head') %>
+
     <link href="/css/index.css" rel="stylesheet" />
-    <title>Draw App</title>
+    <title>Guess App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <form action="/game" method="get">
-      <input type="text" name="username" placeholder="enter a name" />
-      <button>Submit</button>
+    <h1>Guess the sketch</h1>
+
+    <form action="/game" method="get" class="shadow round-edges">
+      <input
+        type="text"
+        name="username"
+        placeholder="Enter your name"
+        class="input-field"
+      />
+      <button class="shadow">Play</button>
+
+      <section>
+        <section id="player-select">
+          <div id="right-arrow">&lt;</div>
+          <img src="/assets/icons/icon0.png" alt="" width="125" />
+          <div id="left-arrow">&gt;</div>
+        </section>
+        <a href="/how-to-play"
+          ><i class="fa-regular fa-circle-question"></i> How To Play</a
+        >
+      </section>
+      <script src="/js/HomePage/AvatarSelector.js"></script>
     </form>
   </body>
 </html>

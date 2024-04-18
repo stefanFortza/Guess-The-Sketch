@@ -1,0 +1,12 @@
+@media screen and (max-width: 700px) {
+  body {
+    /* overflow: auto; */
+  }
+  main {
+    grid-template-columns: 1fr auto;
+  }
+  #canvas-container {
+    grid-column: 1/2;
+    grid-row: 2/3;
+  }
+}

@@ -14,12 +14,6 @@ function init() {
     handleRoundSocketRoutes(socket, io);
 
     handleCanvasSocketRoutes(socket, io);
-
-    socket.on("guess", (data) => {
-      // socket.broadcast.emit("message", data);
-      io.emit("message", data);
-      console.log(data);
-    });
   });
 
   // 30 s per guess
@@ -27,7 +21,7 @@ function init() {
     if (roundData.players.length) {
       startNewRound(io);
     }
-  }, 5000);
+  }, 95000);
 }
 
 export default { init };
