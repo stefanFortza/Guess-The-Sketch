@@ -9,7 +9,6 @@ This project is a web-based game where players guess the sketch being drawn by o
 - Real-time drawing and guessing
 - Chat functionality
 - Score tracking
-- Multiple game rooms
 - User authentication
 
 ## Technologies
