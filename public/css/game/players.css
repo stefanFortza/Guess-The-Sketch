@@ -1,0 +1,72 @@
+#players {
+  /* border: 2px solid red; */
+  box-sizing: border-box;
+  width: 90%;
+  height: 70vh;
+  padding: 10px;
+  background-color: #2a9d8f;
+  display: block;
+}
+
+#players > h3 {
+  font-size: 2em;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+#players-container {
+  /* border: 2px solid red; */
+  box-sizing: border-box;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+#players-container > div {
+  font-size: 1.2rem;
+  background-color: #f4a261;
+  box-sizing: border-box;
+  padding: 5px;
+  border-radius: 0.2em;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  font-weight: 100;
+}
+
+#players-container > div > img {
+  display: inline-block;
+  margin-right: auto;
+  width: 2em;
+  height: auto;
+  transform-origin: 50% 40%;
+  animation-duration: 2s;
+}
+
+#drawer {
+  display: none;
+}
+.correct-guess-player-animation-class {
+  animation-name: correct-guess-player-animation;
+}
+
+@keyframes correct-guess-player-animation {
+  0% {
+    transform: rotate(0deg) translate(0px, 0px);
+  }
+
+  33% {
+    transform: rotate(0deg) translate(0, -10%);
+  }
+
+  66% {
+    transform: rotate(360deg) translate(0px, -10%);
+  }
+
+  100% {
+    transform: rotate(360deg) translate(0px, 0px);
+  }
+}
