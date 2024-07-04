@@ -24,11 +24,11 @@ This project is a web-based game where players guess the sketch being drawn by o
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/web-guess-the-sketch-game.git
+   git clone https://github.com/stefanFortza/Guess-The-Sketch.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd web-guess-the-sketch-game
+   cd Guess-The-Sketch
    ```
 3. Install the dependencies:
    ```bash
@@ -41,4 +41,4 @@ This project is a web-based game where players guess the sketch being drawn by o
    ```bash
    npm start
    ```
-2. Open your web browser and go to `http://localhost:3000`.
+2. Open your web browser and go to `http://localhost:5000`.
