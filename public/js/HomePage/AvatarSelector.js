@@ -28,6 +28,7 @@ form.addEventListener("submit", (e) => {
   const inp = document.createElement("input");
   inp.name = "avatar";
   inp.value = image.src;
+  inp.style.visibility = "hidden";
   e.target.appendChild(inp);
   console.log(e.target);
 });
