@@ -4,6 +4,8 @@
 
 This project is a web-based game where players guess the sketch being drawn by other players in real-time. It includes features for drawing, guessing, and chat functionality, making it a fun and interactive game for multiple users.
 
+![Screenshot of the game](image.png)
+
 ## Features
 
 - Real-time drawing and guessing
