@@ -15,11 +15,12 @@ This project is a web-based game where players guess the sketch being drawn by o
 
 ## Technologies
 
-- Node.js
-- Express.js
-- Socket.io
-- EJS
-- CSS
+- ![Node](https://img.shields.io/badge/node.js-black?style=for-the-badge&logo=nodedotjs&logoColor=5FA04E)
+- ![Express](https://img.shields.io/badge/express.js-white?style=for-the-badge&logo=express&logoColor=000000)
+- ![Socket.io](https://img.shields.io/badge/socket.io-white?style=for-the-badge&logo=socketdotio&logoColor=%23010101)
+- ![EJS](https://img.shields.io/badge/ejs-white?style=for-the-badge&logo=ejs&logoColor=B4CA65)
+- ![CSS](https://img.shields.io/badge/css-white?style=for-the-badge&logo=css3&logoColor=%231572B6)
+
 
 ## Installation
 
